@@ -4,15 +4,26 @@ import {useState} from "react"
 const API = import.meta.env.VITE_API_URL
 
 function CatNewForm() {
+    const navigate = useNavigate()
     const [cat, setCat]=useState({
         // get info from table created for this object
-        name: ""
+        name: "",
+        age: "",
+        color: "",
+        breed: "",
+        arrival_date: "",
+        spayed: false
     })
     
     const addNewCat = ()=>{
         const newCatData = {
             // get info from table created for this object
-            name: ""
+            name: cat.name,
+            age: cat.age,
+            color: cat.color,
+            breed: cat.breed,
+            arrival_date: cat.arrival_date,
+            spayed: cat.spayed
         }
         try {
             fetch(`${API}/cats`, {
@@ -23,7 +34,7 @@ function CatNewForm() {
                 body: JSON.stringify(newCatData)
             })
             .then(res=>res.json())
-            .then(()=>Navigate('/cats'))
+            .then(()=>navigate('/cats'))
         } catch (error) {
             return error
         }
@@ -33,26 +44,84 @@ function CatNewForm() {
         setCat({ ...cat, [e.target.id]: e.target.value})
     }
 
+    const handleSpayedCheckboxChange = ()=>{
+        setCat({ ...cat, spayed: !cat.spayed})
+    }    
+
     const handleNewFormSubmit = (e)=>{
         e.preventDefault()
-        addCat()
+        addNewCat()
     }
     return (
         <div>
             <br/>
             <form onSubmit={handleNewFormSubmit}>
-                <label htmlFor="1st field">1st field: </label>
+                <label htmlFor="name">Cat Name: </label>
                 <input
-                    id="1st field"
-                    value={""}
+                    id="name"
+                    value={cat.name}
                     type="text"
                     onChange={handleNewFormTextChange}
-                    placeholder=""
+                    placeholder="name of cat"
                     required
                 />
                 <br/>
                 <br/>
-                <label htmlFor="2nd field">2nd field: </label>
+                <label htmlFor="age">Age of Cat: </label>
+                <input
+                    id="age"
+                    value={cat.age}
+                    type="number"
+                    onChange={handleNewFormTextChange}
+                    placeholder="Age of Cat"
+                    required
+                />
+                <br/>
+                <br/>
+                <label htmlFor="color">Color of Cat: </label>
+                <input
+                    id="color"
+                    value={cat.color}
+                    type="text"
+                    onChange={handleNewFormTextChange}
+                    placeholder="Color of Cat"
+                    required
+                />
+                <br/>
+                <br/>
+                 <label htmlFor="breed">Cat breed: </label>
+                <input
+                    id="breed"
+                    value={cat.breed}
+                    type="text"
+                    onChange={handleNewFormTextChange}
+                    placeholder="Cat Breed"
+                    required
+                />
+                <br/>
+                <br/>
+                <label htmlFor="arrival">Arrival Date: </label>
+                <input
+                    id="arrival"
+                    value={cat.arrival_date}
+                    type="text"
+                    onChange={handleNewFormTextChange}
+                    placeholder="mm/dd/yyyy"
+                    
+                /> 
+                <br/>
+                <br/>   
+                <label htmlFor="spayed">Spayed: </label>
+                <input
+                    id="spayed"
+                    type="checkbox"
+                    onChange={handleSpayedCheckboxChange}
+                    checked={cat.spayed}
+                    
+                />
+                <br/>
+                <br/>
+                {/* <label htmlFor="7th field">7th field: </label>
                 <input
                     id=""
                     value={""}
@@ -60,69 +129,14 @@ function CatNewForm() {
                     onChange={handleNewFormTextChange}
                     placeholder=""
                     required
-                />
-                <br/>
-                <br/>
-                <label htmlFor="3rd field">3rd field: </label>
-                <input
-                    id=""
-                    value={""}
-                    type="text"
-                    onChange={handleNewFormTextChange}
-                    placeholder=""
-                    required
-                />
-                <br/>
-                <br/>
-                 <label htmlFor="4th field">4th field: </label>
-                <input
-                    id=""
-                    value={""}
-                    type="text"
-                    onChange={handleNewFormTextChange}
-                    placeholder=""
-                    required
-                />
-                <br/>
-                <br/>
-                <label htmlFor="5th field">5th field: </label>
-                <input
-                    id=""
-                    value={""}
-                    type="text"
-                    onChange={handleNewFormTextChange}
-                    placeholder=""
-                    required
-                />
-                <br/>
-                <br/>
-                <label htmlFor="6th field">6th field: </label>
-                <input
-                    id=""
-                    value={""}
-                    type="text"
-                    onChange={handleNewFormTextChange}
-                    placeholder=""
-                    required
-                />
-                <br/>
-                <br/>
-                <label htmlFor="7th field">7th field: </label>
-                <input
-                    id=""
-                    value={""}
-                    type="text"
-                    onChange={handleNewFormTextChange}
-                    placeholder=""
-                    required
-                />
+                /> */}
                 <br/>
                 <br/>
                 <button type="submit">Add New Cat!</button>
             </form>
             <br/>
             <Link to={`/cats`}>
-                <button>Don't Add! Return to All Cats!</button>
+                <button>Don't Add! Return to Cat!</button>
             </Link>
         </div>
     )

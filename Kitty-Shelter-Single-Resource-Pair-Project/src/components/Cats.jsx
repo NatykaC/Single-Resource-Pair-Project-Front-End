@@ -28,8 +28,8 @@ function Cats() {
             {/* <h1>
                 Testing Cats function connection
             </h1> */}
-            {cats.map((cat)=>{
-                return <Cat key={cat.id} cat={cat}/>
+            {cats.length && cats.map((cat)=>{
+                return <Cat key={cat.id} cat={cat} />
             })}
         </div>
     )

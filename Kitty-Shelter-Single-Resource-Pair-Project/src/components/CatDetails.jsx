@@ -4,7 +4,14 @@ import {useState, useEffect} from "react"
 const API = import.meta.env.VITE_API_URL
 
 function CatDetails() {
-    const [cat, setCat] = useState({name: ""})
+    const [cat, setCat] = useState({
+        name: "",
+        age: "",
+        color: "",
+        breed: "",
+        arrival_date: "",
+        spayed: ""
+        })
     let navigate = useNavigate()
     let {index} = useParams()
 
@@ -41,9 +48,26 @@ function CatDetails() {
     }
     return (
         <div>
-            {/* <h1>
-                Testing CatDetails function connection
-            </h1> */}
+            <div>
+                <h2>
+                 Cat Name: {cat.name}
+                </h2>
+                <h3>
+                    Age: {cat.age}
+                </h3>
+                <h3>
+                    Color: {cat.color}
+                </h3>
+                <h3>
+                    Breed: {cat.breed}
+                </h3>
+                <h3>
+                    Arrival Date: {cat.arrival_date}
+                </h3>
+                <h3>
+                    Spayed: {cat.spayed }
+                </h3>
+            </div>
             <div>
                 <Link to={`/cats`}>
                     <button>Back to All Cats!</button>
