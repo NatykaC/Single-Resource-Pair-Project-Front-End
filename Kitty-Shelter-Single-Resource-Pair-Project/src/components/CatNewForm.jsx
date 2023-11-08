@@ -22,7 +22,7 @@ function CatNewForm() {
                 },
                 body: JSON.stringify(newCatData)
             })
-            .then(res=>res.json)
+            .then(res=>res.json())
             .then(()=>Navigate('/cats'))
         } catch (error) {
             return error
