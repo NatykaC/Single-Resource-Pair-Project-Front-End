@@ -1,5 +1,6 @@
 import {useNavigate, Link} from "react-router-dom"
 import {useState} from "react"
+import '../styles/CatNewForm.css'
 
 const API = import.meta.env.VITE_API_URL
 
@@ -11,18 +12,17 @@ function CatNewForm() {
         age: "",
         color: "",
         breed: "",
-        arrival_date: "",
+        arrivalDate: "",
         spayed: false
     })
     
     const addNewCat = ()=>{
         const newCatData = {
-            // get info from table created for this object
             name: cat.name,
             age: cat.age,
             color: cat.color,
             breed: cat.breed,
-            arrival_date: cat.arrival_date,
+            arrival_date: cat.arrivalDate,
             spayed: cat.spayed
         }
         try {
@@ -53,7 +53,8 @@ function CatNewForm() {
         addNewCat()
     }
     return (
-        <div>
+        <div className="new-form">
+            <h2>Add New Cat Below: </h2>
             <br/>
             <form onSubmit={handleNewFormSubmit}>
                 <label htmlFor="name">Cat Name: </label>
@@ -103,10 +104,10 @@ function CatNewForm() {
                 <label htmlFor="arrival">Arrival Date: </label>
                 <input
                     id="arrival"
-                    value={cat.arrival_date}
+                    value={cat.arrivalDate}
                     type="text"
                     onChange={handleNewFormTextChange}
-                    placeholder="mm/dd/yyyy"
+                    placeholder="Arrival Date"
                     
                 /> 
                 <br/>
@@ -117,26 +118,14 @@ function CatNewForm() {
                     type="checkbox"
                     onChange={handleSpayedCheckboxChange}
                     checked={cat.spayed}
-                    
                 />
-                <br/>
-                <br/>
-                {/* <label htmlFor="7th field">7th field: </label>
-                <input
-                    id=""
-                    value={""}
-                    type="text"
-                    onChange={handleNewFormTextChange}
-                    placeholder=""
-                    required
-                /> */}
                 <br/>
                 <br/>
                 <button type="submit">Add New Cat!</button>
             </form>
             <br/>
             <Link to={`/cats`}>
-                <button>Don't Add! Return to Cat!</button>
+                <button>Don't Add! Return to All Cats!</button>
             </Link>
         </div>
     )

@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react"
 import Cat from "./Cat"
+import '../styles/Cats.css'
 
 const API = import.meta.env.VITE_API_URL
 
@@ -24,13 +25,12 @@ function Cats() {
     )
 
     return (
-        <div>
-            {/* <h1>
-                Testing Cats function connection
-            </h1> */}
-            {cats.length && cats.map((cat)=>{
+        <div className="cats">
+            <h1>
+            {cats.map((cat)=>{
                 return <Cat key={cat.id} cat={cat} />
             })}
+            </h1>
         </div>
     )
 }

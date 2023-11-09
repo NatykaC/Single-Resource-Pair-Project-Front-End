@@ -1,5 +1,6 @@
 import {Link, useParams, useNavigate} from "react-router-dom"
 import {useState, useEffect} from "react"
+import "../styles/CatDetails.css"
 
 const API = import.meta.env.VITE_API_URL
 
@@ -10,7 +11,7 @@ function CatDetails() {
         color: "",
         breed: "",
         arrival_date: "",
-        spayed: ""
+        spayed: "",
         })
     let navigate = useNavigate()
     let {index} = useParams()
@@ -47,11 +48,11 @@ function CatDetails() {
         }
     }
     return (
-        <div>
+        <div className="show-cat-details">
             <div>
-                <h2>
-                 Cat Name: {cat.name}
-                </h2>
+                <h3>
+                 Name: {cat.name}
+                </h3>
                 <h3>
                     Age: {cat.age}
                 </h3>
@@ -65,19 +66,22 @@ function CatDetails() {
                     Arrival Date: {cat.arrival_date}
                 </h3>
                 <h3>
-                    Spayed: {cat.spayed }
+                    Spayed: {cat.spayed ? <span>✅</span> : <span>❌</span>}   
                 </h3>
             </div>
+            <br/>
             <div>
                 <Link to={`/cats`}>
                     <button>Back to All Cats!</button>
                 </Link>
             </div>
+            <br/>
             <div>
                 <Link to={`/cats/${index}/edit`}>
                     <button>Edit Cat</button>
                 </Link>
             </div>
+            <br/>
             <button onClick={handleDelete}>Delete Cat</button>
         </div>
     )

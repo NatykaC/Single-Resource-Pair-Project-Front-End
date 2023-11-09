@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import {useParams, Link, useNavigate} from "react-router-dom"
+import '../styles/CatEditForm.css'
 
 const API = import.meta.env.VITE_API_URL
 
@@ -12,7 +13,7 @@ function CatEditForm() {
         age: "",
         color: "",
         breed: "",
-        arrival_date: "",
+        arrivalDate: "",
         spayed: false
     })
 
@@ -26,12 +27,11 @@ function CatEditForm() {
 
     const updateCat = ()=>{
         const editedCatData = {
-            // Get cat info from table created for this object
             name: cat.name,
             age: cat.age,
             color: cat.color,
             breed: cat.breed,
-            arrival_date: cat.arrival_date,
+            arrival_date: cat.arrivalDate,
             spayed: cat.spayed
 
         }
@@ -44,7 +44,7 @@ function CatEditForm() {
                 body: JSON.stringify(editedCatData)
             })
             .then(res=>res.json())
-            .then(()=>navigate('/cats'))
+            .then(()=>navigate(`/cats/${index}`))
             
         } catch (error) {
             return error
@@ -57,8 +57,11 @@ function CatEditForm() {
     }
 
     return (
-        <div>
+        <div className="edit-form">
             <br/>
+            <h2>
+               Edit Cat Below:
+            </h2>
             <form onSubmit={handleEditFormSubmit}>
                 <label htmlFor="name">Cat Name: </label>
                 <input
@@ -107,7 +110,7 @@ function CatEditForm() {
                 <label htmlFor="arrival"> Arrival Date: </label>
                 <input
                     id="arrival"
-                    value={cat.arrival_date}
+                    value={cat.arrivalDate}
                     type="text"
                     onChange={handleEditFormTextChange}
                     placeholder="Arrival Date"
@@ -125,22 +128,11 @@ function CatEditForm() {
                 />
                 <br/>
                 <br/>
-                {/* <label htmlFor="7th field"> 7th field</label>
-                <input
-                    id=""
-                    value={""}
-                    type=""
-                    onChange={handleEditFormTextChange}
-                    placeholder=""
-                    required
-                /> */}
-                <br/>
-                <br/>
                 <button type="submit">Submit to Edit</button>
             </form>
                 <br/>
                 <Link to={`/cats/${index}`}>
-                    <button>Don't Edit! Return to All Cats!</button>
+                    <button>Don't Edit! Return to Cat!</button>
                 </Link> 
         </div>
     )
